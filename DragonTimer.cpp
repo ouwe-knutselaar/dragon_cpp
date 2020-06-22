@@ -2,6 +2,7 @@
 #include <thread>
 #include <iostream>
 #include <unistd.h>
+#include <sys/time.h>
 
 
 using namespace std;
@@ -20,10 +21,23 @@ DragonTimer::~DragonTimer()
 void DragonTimer::threadFunction()
 {
 	cout<<"DragonTimer: Start the timer thread function"<<endl;
-	while(running)
+	struct timeval trgtime,timenow;
+	gettimeofday(&trgtime, NULL);
+	long int interval_triggertime = trgtime.tv_sec * 1000000 + trgtime.tv_usec;
+	long int epoch_in_ms=0;
+
+	interval_triggertime = interval_triggertime + 20000;
+	while(running_)
 	{
-		usleep(5000);
-		callBackObject->sendEvent("timer",1,2);
+		usleep(1000);
+		int rc=gettimeofday(&timenow, NULL);
+		if(rc!=0)cout<<" error";
+		epoch_in_ms = timenow.tv_sec * 1000000 + timenow.tv_usec;
+		if(epoch_in_ms > interval_triggertime)
+			{callBackObject_->sendEvent("timer",1,2);
+			interval_triggertime = interval_triggertime + 20000;	// add 20 ms
+			 cout<<".";
+			}
 	}
 }
 
@@ -38,7 +52,7 @@ void DragonTimer::startTimer()
 
 void DragonTimer::addEvent(DragonEvent &evt)
 {
-	callBackObject = &evt;
+	callBackObject_ = &evt;
 }
 
 

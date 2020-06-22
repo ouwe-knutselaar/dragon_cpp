@@ -18,10 +18,10 @@ class DragonTimer
     protected:
 
     private:
-        DragonEvent *callBackObject;
-        const int intervalInMilliseconds = 50;		// Default interval = 50mS
+        DragonEvent *callBackObject_;
+        const int intervalInMilliseconds_ = 20;		// Default interval = 50mS
         void threadFunction();
-        bool running = true;
+        bool running_ = true;
 };
 
 #endif // DRAGONTIMER_H

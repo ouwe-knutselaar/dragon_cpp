@@ -1,20 +1,23 @@
+#include "DragonFileManager.h"
+#include "DragonActionRecord.h"
+
 #include <dirent.h>
 #include <iostream>
 #include <vector>
 #include <string>
-#include <set>
 #include <dirent.h>
 #include <fstream>
-#include <ios>
-#include "DragonFileManager.h"
-#include "DragonActionRecord.h"
 #include <ostream>
+#include <stdlib.h>
+#include <time.h>
+
 
 using namespace std;
 
 DragonFileManager::DragonFileManager()
 {
     cout<<"DragonFileManager: Starting the DragonFileManager"<<endl;
+    srand (time(NULL));
 }
 
 DragonFileManager::~DragonFileManager()
@@ -27,28 +30,28 @@ DragonFileManager::~DragonFileManager()
 
 void DragonFileManager::loadActionNamesList()
 {
-	cout<<"DragonFileManager:  open dir "<<__currentpath<<endl;
+	cout<<"DragonFileManager:  open dir "<<currentpath_<<endl;
 
     struct dirent *ent;
     DIR *dir;
-    dir = opendir(__currentpath);
+    dir = opendir(currentpath_);
 
       while( (ent = readdir(dir)) != NULL)
       {
           if( ( ent->d_type == DT_DIR ) & ( ent->d_name[0] != '.') )
           {
-              DragonActionRecord temp(__currentpath,ent->d_name);
-              __dirList.push_back(temp);
+              DragonActionRecord temp(currentpath_,ent->d_name);
+              dirList_.push_back(temp);
           }
       };
 
-        for(unsigned int tel = 0 ;tel<__dirList.size();tel++)__dirList[tel].print();
+        for(unsigned int tel = 0 ;tel<dirList_.size();tel++)dirList_[tel].print();
 }
 
 
 void DragonFileManager::setCurrentPath(char* newPath)
 {
-    __currentpath = newPath;
+    currentpath_ = newPath;
 }
 
 
@@ -64,22 +67,15 @@ unsigned int* DragonFileManager::seqLineToIntPtr(string line)
 
 
 
-void DragonFileManager::loadAction(string actionName,unsigned int  **stepList,int *stepListSize)
+void DragonFileManager::getCurrentActionSteps(unsigned int **stepList,int *stepListSize)
 {
-	cout<<"DragonFileManager: search action -"<<actionName<<"- "<<endl;
-
-	// Find the action
-	string seqFileName = "";
-	for(DragonActionRecord record : __dirList)
-	{
-		if(record.getActionName() == actionName)seqFileName = record.getSeqName();
-	}
-	cout<<"DragonFileManager: load action "<<seqFileName<<endl;
+	cout<<"DragonFileManager: search action -"<<dirList_[currentAction_].getActionName()<<"- "<<endl;
+	cout<<"DragonFileManager: load action "<<dirList_[currentAction_].getSeqName()<<endl;
 
 	  // Load the sequence file in a temp list
 	  string line;
 	  vector<string> tempList;
-	  ifstream seqFile(seqFileName,ios::in);
+	  ifstream seqFile(dirList_[currentAction_].getSeqName(),ios::in);
 	  for(string line ; getline(seqFile,line); )tempList.push_back(line);
 
 	    // fill the steplist
@@ -94,5 +90,15 @@ void DragonFileManager::loadAction(string actionName,unsigned int  **stepList,in
 	      cout<<"DragonFileManager: contains "<<tempList.size()<<" steps"<<endl;
 }
 
+void DragonFileManager::defineRandomAction(int actionType)
+{
+	currentAction_ = rand()%dirList_.size();
 
+
+}
+
+string DragonFileManager::getCurrectWaveFile()
+{
+	return dirList_[currentAction_].getWaveName();
+}
 

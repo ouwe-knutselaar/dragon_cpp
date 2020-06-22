@@ -16,13 +16,17 @@ class DragonFileManager
 
         void loadActionNamesList();
         void setCurrentPath(char*);
-        void loadAction(string,unsigned int**,int*);
+        void getCurrentActionSteps(unsigned int**,int*);
+        void defineRandomAction(int actionType);
+        string getCurrectWaveFile();
+
 
     protected:
 
     private:
-        vector<DragonActionRecord> __dirList;
-        char* __currentpath;
+        vector<DragonActionRecord> dirList_;		// The list with actions
+        char* currentpath_;							// Data path for the action
+        int currentAction_;							// number of the current action
         unsigned int* seqLineToIntPtr(string);
 
 };
