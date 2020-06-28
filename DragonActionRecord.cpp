@@ -3,7 +3,6 @@
 #include <string>
 
 
-using namespace std;
 
 DragonActionRecord::DragonActionRecord(char *newPathName,        // name of the source path
                                        char *newActionName      // name of the action
@@ -36,11 +35,10 @@ DragonActionRecord::~DragonActionRecord()
 
 void DragonActionRecord::print()
 {
- cout<<"DragonActionRecord: pathName=  "<<pathName<<endl;
- cout<<"DragonActionRecord: actionName= \'"<<actionName<<"\'"<<endl;
- cout<<"DragonActionRecord: seqName=   "<<seqName<<endl;
- cout<<"DragonActionRecord: waveName=  "<<waveName<<endl;
-
+	std::cout<<"DragonActionRecord: pathName=  "<<pathName<<endl;
+	std::cout<<"DragonActionRecord: actionName= \'"<<actionName<<"\'"<<endl;
+	std::cout<<"DragonActionRecord: seqName=   "<<seqName<<endl;
+	std::cout<<"DragonActionRecord: waveName=  "<<waveName<<endl;
 }
 
 

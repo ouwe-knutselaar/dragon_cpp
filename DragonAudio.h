@@ -6,7 +6,7 @@
 #include <sndfile.h>
 
 
-using namespace std;
+
 
 class DragonAudio {
 public:

@@ -5,6 +5,9 @@
 #include "DragonFileManager.h"
 #include "DragonI2c.h"
 #include "DragonEvent.h"
+#include "dynamicarray.h"
+
+
 
 
 class DragonOrchestrator:public DragonEvent
@@ -22,7 +25,8 @@ class DragonOrchestrator:public DragonEvent
         void executeNextActionInTheSequence();
 
         bool actionRunning = false;		// Flag if a sequence is running
-        unsigned int **stepList;		// reference to the sequence list
+        dynamicarray stepList;		// reference to the sequence list
+
         int stepListSize;
         int currentStep = 0;				// Step in the sequence list
 };

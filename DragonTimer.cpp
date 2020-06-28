@@ -5,12 +5,12 @@
 #include <sys/time.h>
 
 
-using namespace std;
+
 
 
 DragonTimer::DragonTimer()
 {
-    cout<<"DragonTimer: Start DragonTimer";
+	std::cout<<"DragonTimer: Start DragonTimer";
 }
 
 DragonTimer::~DragonTimer()
@@ -20,7 +20,7 @@ DragonTimer::~DragonTimer()
 
 void DragonTimer::threadFunction()
 {
-	cout<<"DragonTimer: Start the timer thread function"<<endl;
+	std::cout<<"DragonTimer: Start the timer thread function"<<std::endl;
 	struct timeval trgtime,timenow;
 	gettimeofday(&trgtime, NULL);
 	long int interval_triggertime = trgtime.tv_sec * 1000000 + trgtime.tv_usec;
@@ -31,12 +31,12 @@ void DragonTimer::threadFunction()
 	{
 		usleep(1000);
 		int rc=gettimeofday(&timenow, NULL);
-		if(rc!=0)cout<<" error";
+		if(rc!=0)std::cout<<" error";
 		epoch_in_ms = timenow.tv_sec * 1000000 + timenow.tv_usec;
 		if(epoch_in_ms > interval_triggertime)
 			{callBackObject_->sendEvent("timer",1,2);
 			interval_triggertime = interval_triggertime + 20000;	// add 20 ms
-			 cout<<".";
+			std::cout<<".";
 			}
 	}
 }
@@ -44,8 +44,8 @@ void DragonTimer::threadFunction()
 
 void DragonTimer::startTimer()
 {
-	cout<<"DragonTimer: Start the timer Thread"<<endl;
-	thread timerThread(&DragonTimer::threadFunction,this);
+	std::cout<<"DragonTimer: Start the timer Thread"<<std::endl;
+	std::thread timerThread(&DragonTimer::threadFunction,this);
 	timerThread.detach();
 }
 

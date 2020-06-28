@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../DragonActionLine.cpp \
 ../DragonActionRecord.cpp \
 ../DragonAudio.cpp \
 ../DragonEvent.cpp \
@@ -11,9 +12,11 @@ CPP_SRCS += \
 ../DragonI2c.cpp \
 ../DragonOrchestrator.cpp \
 ../DragonTimer.cpp \
-../dragon.cpp 
+../dragon.cpp \
+../dynamicarray.cpp 
 
 OBJS += \
+./DragonActionLine.o \
 ./DragonActionRecord.o \
 ./DragonAudio.o \
 ./DragonEvent.o \
@@ -21,9 +24,11 @@ OBJS += \
 ./DragonI2c.o \
 ./DragonOrchestrator.o \
 ./DragonTimer.o \
-./dragon.o 
+./dragon.o \
+./dynamicarray.o 
 
 CPP_DEPS += \
+./DragonActionLine.d \
 ./DragonActionRecord.d \
 ./DragonAudio.d \
 ./DragonEvent.d \
@@ -31,7 +36,8 @@ CPP_DEPS += \
 ./DragonI2c.d \
 ./DragonOrchestrator.d \
 ./DragonTimer.d \
-./dragon.d 
+./dragon.d \
+./dynamicarray.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

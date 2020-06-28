@@ -1,12 +1,13 @@
 #ifndef DRAGONFILEMANAGER_H
 #define DRAGONFILEMANAGER_H
 
-#include <string>
+
 #include <vector>
 
 #include "DragonActionRecord.h"
+#include <string>
 
-using namespace std;
+
 
 class DragonFileManager
 {
@@ -16,9 +17,9 @@ class DragonFileManager
 
         void loadActionNamesList();
         void setCurrentPath(char*);
-        void getCurrentActionSteps(unsigned int**,int*);
         void defineRandomAction(int actionType);
-        string getCurrectWaveFile();
+        string getCurrentWaveFile();
+        string getCurrentSequenceFile();
 
 
     protected:

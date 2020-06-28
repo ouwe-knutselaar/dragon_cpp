@@ -4,12 +4,12 @@
 #include "DragonOrchestrator.h"
 
 
-using namespace std;
+
 
 
 int main()
 {
-    cout<<"dragon_cpp: Start the Dragon C++ based\n";
+    std::cout<<"dragon_cpp: Start the Dragon C++ based\n";
 
     DragonOrchestrator dragonOrchestrator;
     dragonOrchestrator.initialize();

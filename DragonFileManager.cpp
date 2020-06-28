@@ -12,8 +12,6 @@
 #include <time.h>
 
 
-using namespace std;
-
 DragonFileManager::DragonFileManager()
 {
     cout<<"DragonFileManager: Starting the DragonFileManager"<<endl;
@@ -30,7 +28,7 @@ DragonFileManager::~DragonFileManager()
 
 void DragonFileManager::loadActionNamesList()
 {
-	cout<<"DragonFileManager:  open dir "<<currentpath_<<endl;
+	std::cout<<"DragonFileManager:  open dir "<<currentpath_<<endl;
 
     struct dirent *ent;
     DIR *dir;
@@ -66,39 +64,18 @@ unsigned int* DragonFileManager::seqLineToIntPtr(string line)
 }
 
 
-
-void DragonFileManager::getCurrentActionSteps(unsigned int **stepList,int *stepListSize)
-{
-	cout<<"DragonFileManager: search action -"<<dirList_[currentAction_].getActionName()<<"- "<<endl;
-	cout<<"DragonFileManager: load action "<<dirList_[currentAction_].getSeqName()<<endl;
-
-	  // Load the sequence file in a temp list
-	  string line;
-	  vector<string> tempList;
-	  ifstream seqFile(dirList_[currentAction_].getSeqName(),ios::in);
-	  for(string line ; getline(seqFile,line); )tempList.push_back(line);
-
-	    // fill the steplist
-	    stepList = new unsigned int*[tempList.size()];
-	    *stepListSize = (unsigned int)tempList.size();
-	    for(unsigned int tel = 0;tel<tempList.size();tel++)
-	    {
-	  	    stepList[tel] = seqLineToIntPtr(tempList[tel]);
-	    }
-
-	      cout<<"DragonFileManager: load action finished"<<endl;
-	      cout<<"DragonFileManager: contains "<<tempList.size()<<" steps"<<endl;
-}
-
 void DragonFileManager::defineRandomAction(int actionType)
 {
-	currentAction_ = rand()%dirList_.size();
-
-
+	currentAction_ = (int)rand()%dirList_.size();
 }
 
-string DragonFileManager::getCurrectWaveFile()
+string DragonFileManager::getCurrentWaveFile()
 {
 	return dirList_[currentAction_].getWaveName();
+}
+
+string DragonFileManager::getCurrentSequenceFile()
+{
+	return dirList_[currentAction_].getSeqName();
 }
 

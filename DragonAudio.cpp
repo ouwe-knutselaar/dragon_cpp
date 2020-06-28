@@ -7,7 +7,7 @@
 #include <sndfile.h>
 
 
-using namespace std;
+
 
 //snd_pcm_t *pcm_handle;
 //SF_INFO sfinfo;
@@ -16,7 +16,7 @@ using namespace std;
 
 DragonAudio::DragonAudio() {
 
-	cout<<"DragonAudio: start the constructor "<<endl;
+	std::cout<<"DragonAudio: start the constructor \n";
 
 
 }
@@ -32,7 +32,7 @@ DragonAudio::~DragonAudio() {
 void DragonAudio::initialize()
 {
 
-	cout<<"DragonAudio: ALSA lib version "<<SND_LIB_VERSION_STR<<endl;
+	std::cout<<"DragonAudio: ALSA lib version "<<SND_LIB_VERSION_STR<<"\n";
 		// See: http://alsamodular.sourceforge.net/alsa_programming_howto.html
 	unsigned int pcm = 0;
 	unsigned int rate = 44100;
@@ -41,7 +41,7 @@ void DragonAudio::initialize()
 	/* Open PCM device for playback. */
 	int rc = snd_pcm_open(&pcm_handle, "default",SND_PCM_STREAM_PLAYBACK, 0);
 	if (rc < 0) {
-	    cerr<<"DragonAudio: unable to open pcm device: "<<snd_strerror(rc)<<endl;
+	    std::cerr<<"DragonAudio: unable to open pcm device: "<<snd_strerror(rc)<<"\n";
 	    exit(1);
 	}
 
@@ -64,10 +64,10 @@ void DragonAudio::initialize()
 
 	snd_pcm_hw_params_get_period_size(hwparams, &frames, 0);
 
-	cout<<"DragonAudio: HW Frames is "<<(int)frames<<endl;
-	cout<<"DragonAudio: PCM handle name = "<<snd_pcm_name(pcm_handle)<<endl;
-	cout<<"DragonAudio: PCM state = "<<snd_pcm_state_name(snd_pcm_state(pcm_handle))<<endl;
-	cout<<"DragonAudio: initialization finished"<<endl;
+	std::cout<<"DragonAudio: HW Frames is "<<(int)frames<<"\n";
+	std::cout<<"DragonAudio: PCM handle name = "<<snd_pcm_name(pcm_handle)<<"\n";
+	std::cout<<"DragonAudio: PCM state = "<<snd_pcm_state_name(snd_pcm_state(pcm_handle))<<"\n";
+	std::cout<<"DragonAudio: initialization finished\n";
 
 }
 
@@ -80,24 +80,24 @@ void DragonAudio::playWaveFile(char* waveFile)
 	short* buf;			// 16 bits sample
 	int pcmrc;
 
-	cout<<"DragonAudio: Play wave file "<<waveFile<<endl;
+	std::cout<<"DragonAudio: Play wave file "<<waveFile<<"\n";
 	SNDFILE *infile = sf_open(waveFile, SFM_READ, &sfinfo);
 		if(infile == NULL){
-			  cerr<<"Error reading file"<<endl;
+			  std::cerr<<"Error reading file\n";
 			  return;
 		}
 
-	cout<<"Sample rate: "<<sfinfo.samplerate<<endl;
-	cout<<"Channels amount: "<<sfinfo.channels <<endl;
-	cout<<"Format is: "<<(sfinfo.format & SF_FORMAT_SUBMASK) <<endl;
-	cout<<"Frames is: "<<sfinfo.frames<<endl;
+	std::cout<<"Sample rate: "<<sfinfo.samplerate<<"\n";
+	std::cout<<"Channels amount: "<<sfinfo.channels <<"\n";
+	std::cout<<"Format is: "<<(sfinfo.format & SF_FORMAT_SUBMASK) <<"\n";
+	std::cout<<"Frames is: "<<sfinfo.frames<<"\n";
 	int bufsize = frames * sfinfo.channels * 2;		// 16 mcp dus 2 bytes
 	buf = (short*)malloc(bufsize);
-	cout<<" Buffer size is "<<bufsize<<endl;
+	std::cout<<" Buffer size is "<<bufsize<<"\n";
 
 	int tel=0;
 	while ((readcount = sf_readf_short(infile, buf, frames))>0) {
-		//cout<<tel;
+		//std::cout<<tel;
 		//tel=tel+readcount;
 		pcmrc = snd_pcm_writei(pcm_handle, buf, readcount);
 
@@ -111,10 +111,10 @@ void DragonAudio::playWaveFile(char* waveFile)
 		else if (pcmrc != readcount) {
 		    fprintf(stderr,"PCM write difffers from PCM read.\n");
 		}
-		//cout<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
+		//std::cout<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
 
 	}
-	cout<<"finished" <<endl;
+	std::cout<<"finished\n";
 	free(buf);
 
 }

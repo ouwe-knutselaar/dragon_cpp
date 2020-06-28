@@ -6,12 +6,11 @@
 #include <fcntl.h>				//Needed for I2C port
 
 
-using namespace std;
 
 
 DragonI2c::DragonI2c()
 {
-    cout<<"DragonI2c: Starting DragonI2c"<<endl;
+	std::cout<<"DragonI2c: Starting DragonI2c"<<std::endl;
 }
 
 
@@ -25,7 +24,7 @@ void DragonI2c::initialize()
 {
     unsigned char buffer[16];
     int i2c_dev = open ("/dev/i2c-1", O_RDWR);
-    cout<<"DragonI2c: Open I2C result is "<<i2c_dev<<endl;
+    std::cout<<"DragonI2c: Open I2C result is "<<i2c_dev<<std::endl;
     int i2c_addr = 0x40;
 
     int rc = ioctl(i2c_dev, I2C_SLAVE, i2c_addr);
