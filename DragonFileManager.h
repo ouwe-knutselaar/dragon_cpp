@@ -21,7 +21,7 @@ class DragonFileManager
         int getCurrentSequenceSteps();
         string getCurrentWaveFile();
         string getCurrentSequenceFile();
-        int* getCurrentActionServoSteps(int);
+        DragonActionLine* getCurrentActionServoSteps(int);
 
 
     protected:

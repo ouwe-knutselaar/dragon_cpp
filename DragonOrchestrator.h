@@ -22,7 +22,6 @@ class DragonOrchestrator:public DragonEvent
     private:
         void handleTimerEvent();
         void selectNewAction();
-        void executeNextActionInTheSequence();
 
         bool actionRunning = false;		// Flag if a sequence is running
         dynamicarray stepList;		// reference to the sequence list

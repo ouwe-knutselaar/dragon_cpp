@@ -8,7 +8,7 @@ class DragonI2c
         DragonI2c();
         virtual ~DragonI2c();
         void initialize();
-        void send_msg(unsigned int[16]);
+        void send_msg(unsigned int*);
 
     protected:
 

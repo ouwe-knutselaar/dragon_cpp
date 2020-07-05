@@ -14,15 +14,9 @@ DragonActionLine::~DragonActionLine() {
 }
 
 
-void DragonActionLine::setValue(int pos, int value)
+unsigned int* DragonActionLine::getServoValues()
 {
-	servovalues[pos]=value;
-}
-
-
-int DragonActionLine::getValue(int pos)
-{
-	return servovalues[pos];
+	return servovalues;
 }
 
 

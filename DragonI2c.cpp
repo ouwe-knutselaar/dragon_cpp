@@ -32,7 +32,9 @@ void DragonI2c::initialize()
     buf[0] = MODE1;
 }
 
-void DragonI2c::send_msg(unsigned int[16])
+void DragonI2c::send_msg(unsigned int *servoValues)
 {
-
+	std::cerr<<servoValues[0]<<" "<<servoValues[1]<<std::endl;
 }
+
+

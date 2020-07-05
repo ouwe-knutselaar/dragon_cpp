@@ -9,11 +9,10 @@ public:
 	virtual ~DragonActionLine();
 
     void fillFromString(std::string);
-	void setValue(int pos, int value);
-	int getValue(int pos);
+	unsigned int* getServoValues();
 
 private:
-	int servovalues[16];
+	unsigned int servovalues[16];
 };
 
 #endif /* DRAGONACTIONLINE_H_ */

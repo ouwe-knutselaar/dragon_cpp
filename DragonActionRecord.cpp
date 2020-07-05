@@ -93,7 +93,7 @@ int DragonActionRecord::getNumberOfSteps()
 	return numberOfSteps;
 }
 
-int* DragonActionRecord::getActionAt(int pos)
+DragonActionLine* DragonActionRecord::getActionAt(int pos)
 {
-
+	return &sequence[pos];
 }

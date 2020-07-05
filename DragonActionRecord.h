@@ -20,7 +20,7 @@ class DragonActionRecord
         string getSeqName();
         string getWaveName();
         int getNumberOfSteps();
-        int* getActionAt(int);
+        DragonActionLine* getActionAt(int);
 
     protected:
 

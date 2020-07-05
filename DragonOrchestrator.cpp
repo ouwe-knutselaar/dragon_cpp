@@ -55,7 +55,8 @@ void DragonOrchestrator::handleTimerEvent()
 	if(actionRunning == false)selectNewAction();
 	currentStep++;
 	std::cerr<<".";
-	//dragonI2c.send_msg()
+	DragonActionLine *line = dragonFileManager.getCurrentActionServoSteps(currentStep);
+	dragonI2c.send_msg(line->getServoValues());
 	if(currentStep>stepListSize)
 	{
 		actionRunning = false;
@@ -82,7 +83,4 @@ void DragonOrchestrator::selectNewAction()
 }
 
 
-void DragonOrchestrator::executeNextActionInTheSequence()
-{
 
-}

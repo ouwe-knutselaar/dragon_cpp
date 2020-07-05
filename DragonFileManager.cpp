@@ -86,7 +86,7 @@ int  DragonFileManager::getCurrentSequenceSteps()
 	return dirList_[currentAction_].getNumberOfSteps();
 }
 
-int* DragonFileManager::getCurrentActionServoSteps(int pos)
+DragonActionLine* DragonFileManager::getCurrentActionServoSteps(int pos)
 {
 	return dirList_[currentAction_].getActionAt(pos);
 }
