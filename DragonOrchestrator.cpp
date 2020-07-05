@@ -34,6 +34,9 @@ DragonOrchestrator::~DragonOrchestrator()
 
 void DragonOrchestrator::initialize()
 {
+
+
+
     dragonFileManager.setCurrentPath("/var/dragon/actions");
     dragonFileManager.loadActionNamesList();
 

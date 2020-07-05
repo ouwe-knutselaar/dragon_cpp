@@ -16,9 +16,7 @@
 
 DragonAudio::DragonAudio() {
 
-	std::cout<<"DragonAudio: start the constructor \n";
-
-
+	std::cerr<<"DragonAudio: start the constructor \n";
 }
 
 
