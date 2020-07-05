@@ -32,7 +32,7 @@ DragonAudio::~DragonAudio() {
 void DragonAudio::initialize()
 {
 
-	std::cout<<"DragonAudio: ALSA lib version "<<SND_LIB_VERSION_STR<<"\n";
+	std::cerr<<"DragonAudio: ALSA lib version "<<SND_LIB_VERSION_STR<<"\n";
 		// See: http://alsamodular.sourceforge.net/alsa_programming_howto.html
 	unsigned int pcm = 0;
 	unsigned int rate = 44100;
@@ -80,20 +80,23 @@ void DragonAudio::playWaveFile(char* waveFile)
 	short* buf;			// 16 bits sample
 	int pcmrc;
 
-	std::cout<<"DragonAudio: Play wave file "<<waveFile<<"\n";
+	sfinfo.format=0;											// Dit moet van de documentatie
+	std::cerr<<"DragonAudio: Play wave file "<<waveFile<<"\n";
 	SNDFILE *infile = sf_open(waveFile, SFM_READ, &sfinfo);
-		if(infile == NULL){
-			  std::cerr<<"Error reading file\n";
-			  return;
-		}
+	if(infile == NULL){
+		  std::cerr<<"DragonAudio:Error reading file\n";
+		  std::cerr<<sf_strerror(infile)<<std::endl;
+		  return;
+	}
 
-	std::cout<<"Sample rate: "<<sfinfo.samplerate<<"\n";
-	std::cout<<"Channels amount: "<<sfinfo.channels <<"\n";
-	std::cout<<"Format is: "<<(sfinfo.format & SF_FORMAT_SUBMASK) <<"\n";
-	std::cout<<"Frames is: "<<sfinfo.frames<<"\n";
+	std::cerr<<"DragonAudio: Fie loaded\n";
+	std::cerr<<"DragonAudio: Sample rate: "<<sfinfo.samplerate<<"\n";
+	std::cerr<<"DragonAudio: Channels amount: "<<sfinfo.channels <<"\n";
+	std::cerr<<"DragonAudio: Format is: "<<(sfinfo.format & SF_FORMAT_SUBMASK) <<"\n";
+	std::cerr<<"DragonAudio: Frames is: "<<sfinfo.frames<<"\n";
 	int bufsize = frames * sfinfo.channels * 2;		// 16 mcp dus 2 bytes
 	buf = (short*)malloc(bufsize);
-	std::cout<<" Buffer size is "<<bufsize<<"\n";
+	std::cerr<<"DragonAudio: Buffer size is "<<bufsize<<"\n";
 
 	int tel=0;
 	while ((readcount = sf_readf_short(infile, buf, frames))>0) {
@@ -102,19 +105,19 @@ void DragonAudio::playWaveFile(char* waveFile)
 		pcmrc = snd_pcm_writei(pcm_handle, buf, readcount);
 
 		if (pcmrc == -EPIPE) {
-		    fprintf(stderr, "Underrun!\n");
+		    fprintf(stderr, "DragonAudio: Underrun!\n");
 		    snd_pcm_prepare(pcm_handle);
 		}
 		else if (pcmrc < 0) {
-		    fprintf(stderr, "Error writing to PCM device: %s\n", snd_strerror(pcmrc));
+		    fprintf(stderr, "DragonAudio: Error writing to PCM device: %s\n", snd_strerror(pcmrc));
 		}
 		else if (pcmrc != readcount) {
-		    fprintf(stderr,"PCM write difffers from PCM read.\n");
+		    fprintf(stderr,"DragonAudio: PCM write difffers from PCM read.\n");
 		}
 		//std::cout<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
 
 	}
-	std::cout<<"finished\n";
+	std::cerr<<"DragonAudio: finished\n";
 	free(buf);
 
 }

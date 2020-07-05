@@ -10,12 +10,13 @@ public:
 	void clear();
 	void pop(DragonActionLine elm);
 	DragonActionLine getElm(int pos);
+	int size();
 
 private:
-	int counter=0;
-	int max=10;
-	DragonActionLine *list=new DragonActionLine[10];
-	int added=10;
+	int counter = 0;
+	int max = 1000;
+	DragonActionLine *list = new DragonActionLine[10];
+	int numberOfNewElementsToAdd = 100;
 };
 
 #endif /* DYNAMICARRAY_H_ */

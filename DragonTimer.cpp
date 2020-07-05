@@ -26,7 +26,7 @@ void DragonTimer::threadFunction()
 	long int interval_triggertime = trgtime.tv_sec * 1000000 + trgtime.tv_usec;
 	long int epoch_in_ms=0;
 
-	interval_triggertime = interval_triggertime + 20000;
+	interval_triggertime = interval_triggertime + intervalInUsec;
 	while(running_)
 	{
 		usleep(1000);
@@ -36,7 +36,7 @@ void DragonTimer::threadFunction()
 		if(epoch_in_ms > interval_triggertime)
 			{callBackObject_->sendEvent("timer",1,2);
 			interval_triggertime = interval_triggertime + 20000;	// add 20 ms
-			std::cout<<".";
+			//std::cout<<".";
 			}
 	}
 }

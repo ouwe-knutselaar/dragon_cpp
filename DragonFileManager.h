@@ -18,8 +18,10 @@ class DragonFileManager
         void loadActionNamesList();
         void setCurrentPath(char*);
         void defineRandomAction(int actionType);
+        int getCurrentSequenceSteps();
         string getCurrentWaveFile();
         string getCurrentSequenceFile();
+        int* getCurrentActionServoSteps(int);
 
 
     protected:

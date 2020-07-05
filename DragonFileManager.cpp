@@ -28,22 +28,22 @@ DragonFileManager::~DragonFileManager()
 
 void DragonFileManager::loadActionNamesList()
 {
-	std::cout<<"DragonFileManager:  open dir "<<currentpath_<<endl;
+	std::cerr<<"DragonFileManager:  open dir "<<currentpath_<<endl;
 
     struct dirent *ent;
     DIR *dir;
     dir = opendir(currentpath_);
 
-      while( (ent = readdir(dir)) != NULL)
-      {
-          if( ( ent->d_type == DT_DIR ) & ( ent->d_name[0] != '.') )
-          {
-              DragonActionRecord temp(currentpath_,ent->d_name);
-              dirList_.push_back(temp);
-          }
-      };
+    while( (ent = readdir(dir)) != NULL)
+    {
+        if( ( ent->d_type == DT_DIR ) & ( ent->d_name[0] != '.') )
+        {
+            DragonActionRecord temp(currentpath_,ent->d_name);
+            dirList_.push_back(temp);
+        }
+    };
 
-        for(unsigned int tel = 0 ;tel<dirList_.size();tel++)dirList_[tel].print();
+    cerr<<"DragonFileManager: loaded "<<dirList_.size()<<" actions\n";
 }
 
 
@@ -69,13 +69,25 @@ void DragonFileManager::defineRandomAction(int actionType)
 	currentAction_ = (int)rand()%dirList_.size();
 }
 
+
 string DragonFileManager::getCurrentWaveFile()
 {
+	cerr<<"DragonFileManager: ask for "<<dirList_[currentAction_].getWaveName()<<endl;
 	return dirList_[currentAction_].getWaveName();
 }
 
 string DragonFileManager::getCurrentSequenceFile()
 {
 	return dirList_[currentAction_].getSeqName();
+}
+
+int  DragonFileManager::getCurrentSequenceSteps()
+{
+	return dirList_[currentAction_].getNumberOfSteps();
+}
+
+int* DragonFileManager::getCurrentActionServoSteps(int pos)
+{
+	return dirList_[currentAction_].getActionAt(pos);
 }
 

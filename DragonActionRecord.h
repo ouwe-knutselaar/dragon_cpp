@@ -1,7 +1,9 @@
 #ifndef DRAGONACTIONRECORD_H
 #define DRAGONACTIONRECORD_H
 
+#include "dynamicarray.h"
 #include <string>
+
 
 using namespace std;
 
@@ -17,6 +19,8 @@ class DragonActionRecord
         string getActionName();
         string getSeqName();
         string getWaveName();
+        int getNumberOfSteps();
+        int* getActionAt(int);
 
     protected:
 
@@ -25,7 +29,9 @@ class DragonActionRecord
         string actionName;      		// name of the action
         string seqName;         		// name of the sequence file
         string waveName;        		// name of the wave file
-        unsigned short int **sequence;	// Sequence of the dragon
+        DragonActionLine *sequence;		// Sequence of the dragon
+        int numberOfSteps;
+
 };
 
 #endif // DRAGONACTIONRECORD_H

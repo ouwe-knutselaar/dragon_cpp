@@ -1,6 +1,7 @@
 #include "dynamicarray.h"
 #include "DragonActionLine.h"
 #include <ostream>
+#include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -19,17 +20,18 @@ dynamicarray::~dynamicarray() {
 
 void dynamicarray::pop(DragonActionLine value)
 {
-	list[counter]=value;
+	list[counter] = value;
 	counter++;
-	if(counter>=max)
+	if(counter >= max)
 	{
-		DragonActionLine *added_array = new DragonActionLine[added];
-		DragonActionLine *temp=new DragonActionLine[max+added];
-		memcpy(temp,list,max*sizeof(int));
-		memcpy(temp + counter, added_array, added * sizeof(int));
-		delete(list);
-		list=temp;
-		max=max+added;
+		std::cerr<<" add new chunk\n";
+		DragonActionLine *added_array = new DragonActionLine[numberOfNewElementsToAdd];
+		DragonActionLine *temp = new DragonActionLine[max+numberOfNewElementsToAdd];
+		memcpy(temp,list,max*sizeof(DragonActionLine));
+		memcpy(temp + counter, added_array, numberOfNewElementsToAdd * sizeof(DragonActionLine));
+		//free(list);
+		list = temp;
+		max = max+numberOfNewElementsToAdd;
 	}
 }
 
@@ -37,4 +39,15 @@ void dynamicarray::pop(DragonActionLine value)
 DragonActionLine dynamicarray::getElm(int pos)
 {
 	return list[pos];
+}
+
+int dynamicarray::size()
+{
+	return counter;
+}
+
+
+void dynamicarray::clear()
+{
+	counter = 0;
 }

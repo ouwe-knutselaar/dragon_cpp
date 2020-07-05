@@ -22,6 +22,8 @@ class DragonTimer
         const int intervalInMilliseconds_ = 20;		// Default interval = 50mS
         void threadFunction();
         bool running_ = true;
+        int intervalInUsec = 20000;	//org
+        //int intervalInUsec = 2000;
 };
 
 #endif // DRAGONTIMER_H

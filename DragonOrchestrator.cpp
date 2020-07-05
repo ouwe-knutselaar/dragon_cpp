@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <ostream>
 
 
 
@@ -16,6 +17,7 @@ DragonFileManager dragonFileManager;
 DragonI2c dragonI2c;
 DragonTimer dragonTimer;
 DragonAudio dragonAudio;
+dynamicarray actionArrayForTheServos;
 
 
 
@@ -51,7 +53,15 @@ void DragonOrchestrator::sendEvent(char *msg,int source,int val2)
 void DragonOrchestrator::handleTimerEvent()
 {
 	if(actionRunning == false)selectNewAction();
-	executeNextActionInTheSequence();
+	currentStep++;
+	std::cerr<<".";
+	//dragonI2c.send_msg()
+	if(currentStep>stepListSize)
+	{
+		actionRunning = false;
+		std::cerr<<endl;;
+	}
+
 }
 
 
@@ -59,20 +69,13 @@ void DragonOrchestrator::selectNewAction()
 {
 	std::cerr<<"DragonOrchestrator: select new action"<<endl;
 	dragonFileManager.defineRandomAction(0);
+	std::cerr<<" new Action is "<<dragonFileManager.getCurrentSequenceFile()<<endl;
+	actionArrayForTheServos.clear();
 
 	actionRunning = true;
 	currentStep = 0;
+	stepListSize = dragonFileManager.getCurrentSequenceSteps();
 	std::cerr<<"DragonOrchestrator: action has "<<stepListSize<<" steps"<<endl;
-
-	// load the sequence file
-	fstream sequenceFileHandle;
-	sequenceFileHandle.open(dragonFileManager.getCurrentSequenceFile(), ios::in);
-	string lineWithServoValues;
-	while(getline(sequenceFileHandle, lineWithServoValues)){  //read data from file object and put it into string.
-	         std::cerr << lineWithServoValues << "\n";   //print the data of the string
-	         DragonActionLine newActionLine;
-
-	      }
 
 	dragonAudio.playWaveFile(&dragonFileManager.getCurrentWaveFile()[0]);
 
@@ -81,9 +84,5 @@ void DragonOrchestrator::selectNewAction()
 
 void DragonOrchestrator::executeNextActionInTheSequence()
 {
-	currentStep++;
-	if(currentStep>stepListSize)
-	{
-		actionRunning = false;
-	}
+
 }
