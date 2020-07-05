@@ -28,7 +28,7 @@ DragonFileManager::~DragonFileManager()
 
 void DragonFileManager::loadActionNamesList()
 {
-	std::cerr<<"DragonFileManager:  open dir "<<currentpath_<<endl;
+	std::cerr<<"DragonFileManager: open dir "<<currentpath_<<endl;
 
     struct dirent *ent;
     DIR *dir;

@@ -34,7 +34,7 @@ DragonOrchestrator::~DragonOrchestrator()
 
 void DragonOrchestrator::initialize()
 {
-    dragonFileManager.setCurrentPath("/home/gebruiker/dev/dragon/actions");
+    dragonFileManager.setCurrentPath("/var/dragon/actions");
     dragonFileManager.loadActionNamesList();
 
     dragonAudio.initialize();
