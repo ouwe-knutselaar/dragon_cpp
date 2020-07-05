@@ -10,31 +10,40 @@
 
 DragonI2c::DragonI2c()
 {
-	std::cout<<"DragonI2c: Starting DragonI2c"<<std::endl;
+	std::cerr<<"DragonI2c: Starting DragonI2c"<<std::endl;
+	initialize();
 }
 
 
-DragonI2c::~DragonI2c()
-{
-    //dtor
+DragonI2c::~DragonI2c(){
 }
 
 
 void DragonI2c::initialize()
 {
-    unsigned char buffer[16];
     int i2c_dev = open ("/dev/i2c-1", O_RDWR);
-    std::cout<<"DragonI2c: Open I2C result is "<<i2c_dev<<std::endl;
+    if(i2c_dev < 0)
+    {
+    	std::cerr<<"\x1B[31mDragonI2c: Cannot op the I2C port \033[0m\n";
+    	return;
+    }
+
     int i2c_addr = 0x40;
-
     int rc = ioctl(i2c_dev, I2C_SLAVE, i2c_addr);
+    if(rc < 0)
+    {
+    	std::cerr<<"\x1B[31mDragonI2c: Failed to acquire bus access and/or talk to slave.\033[0m\n";
+    	return;
+    }
 
+
+    std::cerr<<"DragonI2c: I2C initialized"<<std::endl;
     buf[0] = MODE1;
 }
 
 void DragonI2c::send_msg(unsigned int *servoValues)
 {
-	std::cerr<<servoValues[0]<<" "<<servoValues[1]<<std::endl;
+	//std::cerr<<servoValues[0]<<" "<<servoValues[1]<<std::endl;
 }
 
 

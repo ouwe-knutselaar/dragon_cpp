@@ -70,7 +70,7 @@ void DragonOrchestrator::selectNewAction()
 {
 	std::cerr<<"DragonOrchestrator: select new action"<<endl;
 	dragonFileManager.defineRandomAction(0);
-	std::cerr<<" new Action is "<<dragonFileManager.getCurrentSequenceFile()<<endl;
+	std::cerr<<"DragonOrchestrator: new Action is "<<dragonFileManager.getCurrentSequenceFile()<<endl;
 	actionArrayForTheServos.clear();
 
 	actionRunning = true;

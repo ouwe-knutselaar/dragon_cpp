@@ -41,7 +41,7 @@ void DragonAudio::initialize()
 	/* Open PCM device for playback. */
 	int rc = snd_pcm_open(&pcm_handle, "default",SND_PCM_STREAM_PLAYBACK, 0);
 	if (rc < 0) {
-	    std::cerr<<"DragonAudio: unable to open pcm device: "<<snd_strerror(rc)<<"\n";
+	    std::cerr<<"\x1B[31mDragonAudio: unable to open pcm device: "<<snd_strerror(rc)<<"\033[0m\n";
 	    exit(1);
 	}
 
@@ -56,9 +56,7 @@ void DragonAudio::initialize()
 	/* Write the parameters to the driver */
 	pcm = snd_pcm_hw_params(pcm_handle, hwparams);
 	if (pcm < 0) {
-	    fprintf(stderr,
-	            "unable to set hw parameters: %s\n",
-	            snd_strerror(pcm));
+		std::cerr<<"\x1B[31mDragonAudio: unable to set hw parameters: "<<snd_strerror(pcm)<<"\033[0m\n";
 	    exit(1);
 	}
 
@@ -84,8 +82,8 @@ void DragonAudio::playWaveFile(char* waveFile)
 	std::cerr<<"DragonAudio: Play wave file "<<waveFile<<"\n";
 	SNDFILE *infile = sf_open(waveFile, SFM_READ, &sfinfo);
 	if(infile == NULL){
-		  std::cerr<<"DragonAudio:Error reading file\n";
-		  std::cerr<<sf_strerror(infile)<<std::endl;
+		  std::cerr<<"\x1B[31mDragonAudio: Error reading file\n";
+		  std::cerr<<sf_strerror(infile)<<"\033[0m\n";
 		  return;
 	}
 

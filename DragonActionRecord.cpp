@@ -45,10 +45,11 @@ DragonActionRecord::DragonActionRecord(char *newPathName,        // name of the 
     sequenceFileHandle.seekg(0, ios::beg);
     int counter = 0;
     while(getline(sequenceFileHandle, lineWithServoValues)){  	// read data from file object and put it into string.
-    		     std::cerr<<"#";
+    		     //std::cerr<<"#";
     		     sequence[counter].fillFromString(lineWithServoValues);
     		     counter++;
     }
+    std::cerr<<"DragonActionRecord: record stored in memory\n";
 }
 
 DragonActionRecord::~DragonActionRecord()
