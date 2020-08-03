@@ -60,10 +60,10 @@ void DragonAudio::initialize()
 
 	snd_pcm_hw_params_get_period_size(hwparams, &frames, 0);
 
-	std::cout<<"DragonAudio: HW Frames is "<<(int)frames<<"\n";
-	std::cout<<"DragonAudio: PCM handle name = "<<snd_pcm_name(pcm_handle)<<"\n";
-	std::cout<<"DragonAudio: PCM state = "<<snd_pcm_state_name(snd_pcm_state(pcm_handle))<<"\n";
-	std::cout<<"DragonAudio: initialization finished\n";
+	std::cerr<<"DragonAudio: HW Frames is "<<(int)frames<<"\n";
+	std::cerr<<"DragonAudio: PCM handle name = "<<snd_pcm_name(pcm_handle)<<"\n";
+	std::cerr<<"DragonAudio: PCM state = "<<snd_pcm_state_name(snd_pcm_state(pcm_handle))<<"\n";
+	std::cerr<<"DragonAudio: initialization finished\n";
 
 }
 
@@ -96,7 +96,7 @@ void DragonAudio::playWaveFile(char* waveFile)
 
 	int tel=0;
 	while ((readcount = sf_readf_short(infile, buf, frames))>0) {
-		//std::cout<<tel;
+		//std::cerr<<tel;
 		//tel=tel+readcount;
 		pcmrc = snd_pcm_writei(pcm_handle, buf, readcount);
 
@@ -110,7 +110,7 @@ void DragonAudio::playWaveFile(char* waveFile)
 		else if (pcmrc != readcount) {
 		    fprintf(stderr,"DragonAudio: PCM write difffers from PCM read.\n");
 		}
-		//std::cout<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
+		//std::cerr<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
 
 	}
 	std::cerr<<"DragonAudio: finished\n";

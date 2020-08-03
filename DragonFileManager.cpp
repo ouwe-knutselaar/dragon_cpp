@@ -14,7 +14,7 @@
 
 DragonFileManager::DragonFileManager()
 {
-    cout<<"DragonFileManager: Starting the DragonFileManager"<<endl;
+    cerr<<"DragonFileManager: Starting the DragonFileManager"<<endl;
     srand (time(NULL));
 }
 

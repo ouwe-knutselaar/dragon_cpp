@@ -23,7 +23,7 @@ dynamicarray actionArrayForTheServos;
 
 DragonOrchestrator::DragonOrchestrator()
 {
-	std::cout<<"DragonOrchestrator: Start DragonOrchestrator"<<endl;
+	std::cerr<<"DragonOrchestrator: Start DragonOrchestrator"<<endl;
 }
 
 DragonOrchestrator::~DragonOrchestrator()
