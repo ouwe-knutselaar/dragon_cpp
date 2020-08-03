@@ -8,8 +8,8 @@ class DragonI2c
         DragonI2c();
         virtual ~DragonI2c();
         void initialize();
-        void send_msg(unsigned int*);
-        void sendCommand(char addr, char mode);
+	    void setFrequency(int);
+        void setServoPosition(int,int);
 
     protected:
 
@@ -25,7 +25,7 @@ class DragonI2c
 	   int LEDBASE = 0x06;
 	   int LEDBASELIST[16] = { 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66 };
 	   char buf[60];
-	   int i2c_dev;
+	   int handle;		// File handler for the PCA9865
 
 };
 

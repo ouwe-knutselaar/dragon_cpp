@@ -59,7 +59,10 @@ void DragonOrchestrator::handleTimerEvent()
 	currentStep++;
 	std::cerr<<".";
 	DragonActionLine *line = dragonFileManager.getCurrentActionServoSteps(currentStep);
-	dragonI2c.send_msg(line->getServoValues());
+	for(int tel=0;tel<15;tel++)
+	{
+		dragonI2c.setServoPosition(tel,line->getServoValues()[tel]);
+	}
 	if(currentStep>stepListSize)
 	{
 		actionRunning = false;

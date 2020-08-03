@@ -3,6 +3,7 @@
 
 #include <string>
 
+
 class DragonActionLine {
 public:
 	DragonActionLine();
