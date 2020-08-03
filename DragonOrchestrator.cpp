@@ -45,6 +45,9 @@ void DragonOrchestrator::initialize()
     dragonTimer.addEvent(*this);
     dragonTimer.startTimer();
 
+    dragonI2c.initialize();
+
+
 }
 
 void DragonOrchestrator::sendEvent(char *msg,int source,int val2)
