@@ -22,7 +22,7 @@ unsigned int* DragonActionLine::getServoValues()
 
 void DragonActionLine::fillFromString(string serveoValues)
 {
-	for(int tel = 0;tel<16;tel++)
+	for(int tel = 0;tel<15;tel++)
 		{
 		servovalues[tel] = stoi(serveoValues.substr(tel*4,4+tel*4));
 		}

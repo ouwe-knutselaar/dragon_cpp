@@ -55,8 +55,9 @@ void DragonFileManager::setCurrentPath(char* newPath)
 
 unsigned int* DragonFileManager::seqLineToIntPtr(string line)
 {
+	cerr<<"DragonFileManager: seqLineToIntPtr from "<<line<<" \n" ;
 	unsigned int seqStep[16];
-	for(int tel = 0;tel<16;tel++)
+	for(int tel = 0;tel<15;tel++)
 	{
 		seqStep[tel] = stoi(line.substr(tel*4,4+tel*4));
 	}

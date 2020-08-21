@@ -46,7 +46,7 @@ void DragonOrchestrator::initialize()
     dragonTimer.startTimer();
 
     dragonI2c.initialize();
-
+    dragonI2c.setFrequency(60);
 
 }
 

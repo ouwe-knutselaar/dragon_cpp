@@ -35,6 +35,9 @@ DragonActionRecord::DragonActionRecord(char *newPathName,        // name of the 
     fstream sequenceFileHandle;
     sequenceFileHandle.open(seqName, ios::in);
     string lineWithServoValues;
+
+    getline(sequenceFileHandle,lineWithServoValues);    // First line contains meta info
+
     while(getline(sequenceFileHandle, lineWithServoValues)){	//count the lins
     	numberOfSteps++;
     }
@@ -43,6 +46,9 @@ DragonActionRecord::DragonActionRecord(char *newPathName,        // name of the 
 
     sequenceFileHandle.clear();				// Reset the file
     sequenceFileHandle.seekg(0, ios::beg);
+
+    getline(sequenceFileHandle,lineWithServoValues);	// First line contains meta informatie
+
     int counter = 0;
     while(getline(sequenceFileHandle, lineWithServoValues)){  	// read data from file object and put it into string.
     		     //std::cerr<<"#";
