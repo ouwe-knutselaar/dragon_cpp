@@ -1,4 +1,5 @@
 #include "DragonActionLine.h"
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -22,9 +23,11 @@ unsigned int* DragonActionLine::getServoValues()
 
 void DragonActionLine::fillFromString(string serveoValues)
 {
+	std::cerr<<"DragonActionLine: load line "<<serveoValues<<" \n" ;
 	for(int tel = 0;tel<15;tel++)
 		{
-		servovalues[tel] = stoi(serveoValues.substr(tel*4,4+tel*4));
+		 std::cerr<<"val: "<<serveoValues.substr(tel*4,4)<<"\n";
+		 servovalues[tel] = stoi(serveoValues.substr(tel*4,4));
 		}
 }
 
