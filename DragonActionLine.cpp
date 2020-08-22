@@ -23,10 +23,10 @@ unsigned int* DragonActionLine::getServoValues()
 
 void DragonActionLine::fillFromString(string serveoValues)
 {
-	std::cerr<<"DragonActionLine: load line "<<serveoValues<<" \n" ;
+	//std::cerr<<"DragonActionLine: load line "<<serveoValues<<" \n" ;
 	for(int tel = 0;tel<15;tel++)
 		{
-		 std::cerr<<"val: "<<serveoValues.substr(tel*4,4)<<"\n";
+		 //std::cerr<<"val: "<<serveoValues.substr(tel*4,4)<<"\n";
 		 servovalues[tel] = stoi(serveoValues.substr(tel*4,4));
 		}
 }

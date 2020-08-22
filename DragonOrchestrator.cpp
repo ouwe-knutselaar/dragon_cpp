@@ -34,9 +34,6 @@ DragonOrchestrator::~DragonOrchestrator()
 
 void DragonOrchestrator::initialize()
 {
-
-
-
     dragonFileManager.setCurrentPath("/var/dragon/actions");
     dragonFileManager.loadActionNamesList();
 
@@ -46,9 +43,9 @@ void DragonOrchestrator::initialize()
     dragonTimer.startTimer();
 
     dragonI2c.initialize();
-    dragonI2c.setFrequency(60);
-
+    dragonI2c.setFrequency();
 }
+
 
 void DragonOrchestrator::sendEvent(char *msg,int source,int val2)
 {
@@ -60,7 +57,7 @@ void DragonOrchestrator::handleTimerEvent()
 {
 	if(actionRunning == false)selectNewAction();
 	currentStep++;
-	std::cerr<<".";
+	//std::cerr<<".";
 	DragonActionLine *line = dragonFileManager.getCurrentActionServoSteps(currentStep);
 	for(int tel=0;tel<15;tel++)
 	{
@@ -71,7 +68,6 @@ void DragonOrchestrator::handleTimerEvent()
 		actionRunning = false;
 		std::cerr<<endl;;
 	}
-
 }
 
 
@@ -88,7 +84,6 @@ void DragonOrchestrator::selectNewAction()
 	std::cerr<<"DragonOrchestrator: action has "<<stepListSize<<" steps"<<endl;
 
 	dragonAudio.playWaveFile(&dragonFileManager.getCurrentWaveFile()[0]);
-
 }
 
 
