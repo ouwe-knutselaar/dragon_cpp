@@ -5,6 +5,7 @@
 #include "DragonTimer.h"
 #include "DragonAudio.h"
 #include "dynamicarray.h"
+#include "keylogger.h"
 
 #include <iostream>
 #include <string>
@@ -18,7 +19,7 @@ DragonI2c dragonI2c;
 DragonTimer dragonTimer;
 DragonAudio dragonAudio;
 dynamicarray actionArrayForTheServos;
-
+keylogger keylog;
 
 
 DragonOrchestrator::DragonOrchestrator()
@@ -36,6 +37,8 @@ void DragonOrchestrator::initialize()
 {
     dragonFileManager.setCurrentPath("/var/dragon/actions");
     dragonFileManager.loadActionNamesList();
+
+    keylog.startLogging();
 
     dragonAudio.initialize();
 

@@ -13,7 +13,8 @@ CPP_SRCS += \
 ../DragonOrchestrator.cpp \
 ../DragonTimer.cpp \
 ../dragon.cpp \
-../dynamicarray.cpp 
+../dynamicarray.cpp \
+../keylogger.cpp
 
 OBJS += \
 ./DragonActionLine.o \
@@ -25,7 +26,8 @@ OBJS += \
 ./DragonOrchestrator.o \
 ./DragonTimer.o \
 ./dragon.o \
-./dynamicarray.o 
+./dynamicarray.o \
+./keylogger.o
 
 CPP_DEPS += \
 ./DragonActionLine.d \
@@ -37,7 +39,8 @@ CPP_DEPS += \
 ./DragonOrchestrator.d \
 ./DragonTimer.d \
 ./dragon.d \
-./dynamicarray.d 
+./dynamicarray.d \
+./keylogger.d
 
 
 # Each subdirectory must supply rules for building sources it contributes
