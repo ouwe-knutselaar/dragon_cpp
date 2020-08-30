@@ -27,9 +27,9 @@ class DragonFileManager
     protected:
 
     private:
-        vector<DragonActionRecord> dirList_;		// The list with actions
-        char* currentpath_;							// Data path for the action
-        int currentAction_;							// number of the current action
+        vector<DragonActionRecord> dragonActionRecordList_;	// The list with actions
+        char* currentpath_;					// Data path for the action
+        int currentAction_;					// number of the current action
         unsigned int* seqLineToIntPtr(string);
 
 };

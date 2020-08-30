@@ -28,7 +28,7 @@ DragonFileManager::~DragonFileManager()
 
 void DragonFileManager::loadActionNamesList()
 {
-	std::cerr<<"DragonFileManager: open dir "<<currentpath_<<endl;
+    std::cerr<<"DragonFileManager: open dir "<<currentpath_<<endl;
 
     struct dirent *ent;
     DIR *dir;
@@ -39,14 +39,14 @@ void DragonFileManager::loadActionNamesList()
         if( ( ent->d_type == DT_DIR ) & ( ent->d_name[0] != '.') )
         {
             DragonActionRecord temp(currentpath_,ent->d_name);
-            dirList_.push_back(temp);
+            dragonActionRecordList_.push_back(temp);
         }
     };
 
-    cerr<<"DragonFileManager: loaded "<<dirList_.size()<<" actions\n";
+    cerr<<"DragonFileManager: loaded "<<dragonActionRecordList_.size()<<" actions\n";
 }
 
-
+// Set the corent path for the loading of the action, could be placed in the constructor
 void DragonFileManager::setCurrentPath(char* newPath)
 {
     currentpath_ = newPath;
@@ -64,31 +64,39 @@ unsigned int* DragonFileManager::seqLineToIntPtr(string line)
 	return seqStep;
 }
 
-
-void DragonFileManager::defineRandomAction(int actionType)
+// Select an action based on the actionType
+void DragonFileManager::defineRandomAction(int selectedActionType)
 {
-	currentAction_ = (int)rand()%dirList_.size();
+  while(true)
+  {	  
+  	currentAction_ = (int)rand()%dragonActionRecordList_.size();
+	if(dragonActionRecordList_[currentAction_].getActionType()==selectedActionType)
+	{
+		cerr<<"DragonFileManager: selected "<<dragonActionRecordList_[currentAction_].getActionName()<<"\n";
+		return;
+	}
+  }
 }
 
 
 string DragonFileManager::getCurrentWaveFile()
 {
-	cerr<<"DragonFileManager: ask for "<<dirList_[currentAction_].getWaveName()<<endl;
-	return dirList_[currentAction_].getWaveName();
+	cerr<<"DragonFileManager: ask for "<<dragonActionRecordList_[currentAction_].getWaveName()<<endl;
+	return dragonActionRecordList_[currentAction_].getWaveName();
 }
 
 string DragonFileManager::getCurrentSequenceFile()
 {
-	return dirList_[currentAction_].getSeqName();
+	return dragonActionRecordList_[currentAction_].getSeqName();
 }
 
 int  DragonFileManager::getCurrentSequenceSteps()
 {
-	return dirList_[currentAction_].getNumberOfSteps();
+	return dragonActionRecordList_[currentAction_].getNumberOfSteps();
 }
 
 DragonActionLine* DragonFileManager::getCurrentActionServoSteps(int pos)
 {
-	return dirList_[currentAction_].getActionAt(pos);
+	return dragonActionRecordList_[currentAction_].getActionAt(pos);
 }
 

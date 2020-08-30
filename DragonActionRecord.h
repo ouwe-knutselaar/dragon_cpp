@@ -20,6 +20,7 @@ class DragonActionRecord
         string getSeqName();
         string getWaveName();
         int getNumberOfSteps();
+	int getActionType();
         DragonActionLine* getActionAt(int);
 
     protected:
@@ -30,6 +31,7 @@ class DragonActionRecord
         string seqName;         		// name of the sequence file
         string waveName;        		// name of the wave file
         DragonActionLine *sequence;		// Sequence of the dragon
+	int actionType;				// Type of action, for the remote controller
         int numberOfSteps;
 
 };

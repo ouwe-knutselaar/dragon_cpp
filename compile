@@ -1,0 +1,1 @@
+g++ test.cpp DragonFileManager.cpp DragonActionRecord.cpp DragonActionLine.cpp -o testout
