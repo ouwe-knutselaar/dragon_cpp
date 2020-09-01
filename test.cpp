@@ -1,18 +1,14 @@
-#include "DragonFileManager.h"
+#include "DragonAudio.h"
+#include <iostream>
 
+using namespace std;
 
 
 int main()
 {
- DragonFileManager dfm;
+  DragonAudio da;
 
- dfm.setCurrentPath("/var/dragon/actions");
- dfm.loadActionNamesList();
+  da.playWaveFile("test.wav");
 
- dfm.defineRandomAction(1);
-
- dfm.defineRandomAction(1);
- dfm.defineRandomAction(1);
- dfm.defineRandomAction(1);
- dfm.defineRandomAction(1);
+  cout<<"ready \n";
 }

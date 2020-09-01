@@ -17,19 +17,6 @@
 DragonAudio::DragonAudio() {
 
 	std::cerr<<"DragonAudio: start the constructor \n";
-}
-
-
-DragonAudio::~DragonAudio() {
-	// TODO Auto-generated destructor stub
-	snd_pcm_drain(pcm_handle);
-	snd_pcm_close(pcm_handle);
-}
-
-
-void DragonAudio::initialize()
-{
-
 	std::cerr<<"DragonAudio: ALSA lib version "<<SND_LIB_VERSION_STR<<"\n";
 		// See: http://alsamodular.sourceforge.net/alsa_programming_howto.html
 	unsigned int pcm = 0;
@@ -68,7 +55,11 @@ void DragonAudio::initialize()
 }
 
 
+DragonAudio::~DragonAudio() {
 
+	snd_pcm_drain(pcm_handle);
+	snd_pcm_close(pcm_handle);
+}
 
 void DragonAudio::playWaveFile(char* waveFile)
 {
@@ -113,6 +104,7 @@ void DragonAudio::playWaveFile(char* waveFile)
 		//std::cerr<<" "<<tel<<"  pcrm "<<pcmrc<<endl;
 
 	}
+	sf_close(infile);
 	std::cerr<<"DragonAudio: finished\n";
 	free(buf);
 

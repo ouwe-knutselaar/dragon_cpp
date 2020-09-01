@@ -40,8 +40,6 @@ void DragonOrchestrator::initialize()
 
     keylog.startLogging();
 
-    dragonAudio.initialize();
-
     dragonTimer.addEvent(*this);
     dragonTimer.startTimer();
 

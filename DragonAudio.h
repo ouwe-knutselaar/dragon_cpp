@@ -12,7 +12,6 @@ class DragonAudio {
 public:
 	DragonAudio();
 	virtual ~DragonAudio();
-	void initialize();
 
 	void playWaveFile(char*);
 	void stopWaveFile();

@@ -1,1 +1,1 @@
-g++ test.cpp DragonFileManager.cpp DragonActionRecord.cpp DragonActionLine.cpp -o testout
+g++ test.cpp DragonAudio.cpp -lsndfile -lasound  -o testout
